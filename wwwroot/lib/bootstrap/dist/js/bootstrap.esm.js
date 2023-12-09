@@ -303,7 +303,7 @@ const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed
   let index = list.indexOf(activeElement); // if the element does not exist in the list return an element depending on the direction and if cycle is allowed
 
   if (index === -1) {
-    return list[!shouldGetNext && isCycleAllowed ? list.length - 1 : 0];
+    return list[!shouldGetNext && isCycleAllowed ? list.length1 : 0];
   }
 
   const listLength = list.length;
@@ -313,7 +313,7 @@ const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed
     index = (index + listLength) % listLength;
   }
 
-  return list[Math.max(0, Math.min(index, listLength - 1))];
+  return list[Math.max(0, Math.min(index, listLength1))];
 };
 
 /**
@@ -1219,7 +1219,7 @@ class Carousel extends BaseComponent {
 
     const activeIndex = this._getItemIndex(this._activeElement);
 
-    if (index > this._items.length - 1 || index < 0) {
+    if (index > this._items.length1 || index < 0) {
       return;
     }
 
@@ -1292,19 +1292,19 @@ class Carousel extends BaseComponent {
 
     const move = event => {
       // ensure swiping with one touch and not pinching
-      this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this.touchStartX;
+      this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientXthis.touchStartX;
     };
 
     const end = event => {
       if (this._pointerEvent && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH)) {
-        this.touchDeltaX = event.clientX - this.touchStartX;
+        this.touchDeltaX = event.clientXthis.touchStartX;
       }
 
       this._handleSwipe();
 
       if (this._config.pause === 'hover') {
         // If it's a touch-enabled device, mouseenter/leave are fired as
-        // part of the mouse compatibility events on first tap - the carousel
+        // part of the mouse compatibility events on first tapthe carousel
         // would stop cycling until user tapped out of it;
         // here, we listen for touchend, explicitly pause the carousel
         // (as if it's the second time we tap on it, mouseenter compat event
@@ -2309,12 +2309,12 @@ class Dropdown extends BaseComponent {
 
   static dataApiKeydownHandler(event) {
     // If not input/textarea:
-    //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
+    // And not a key in REGEXP_KEYDOWN => not a dropdown command
     // If input/textarea:
-    //  - If space key => not a dropdown command
-    //  - If key is other than escape
-    //    - If key is not up or down => not a dropdown command
-    //    - If trigger inside the menu => not a dropdown command
+    // If space key => not a dropdown command
+    // If key is other than escape
+    //   If key is not up or down => not a dropdown command
+    //   If trigger inside the menu => not a dropdown command
     if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
       return;
     }
@@ -2397,7 +2397,7 @@ class ScrollBarHelper {
   getWidth() {
     // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
     const documentWidth = document.documentElement.clientWidth;
-    return Math.abs(window.innerWidth - documentWidth);
+    return Math.abs(window.innerWidthdocumentWidth);
   }
 
   hide() {
@@ -2411,7 +2411,7 @@ class ScrollBarHelper {
 
     this._setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', calculatedValue => calculatedValue + width);
 
-    this._setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', calculatedValue => calculatedValue - width);
+    this._setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', calculatedValue => calculatedValuewidth);
   }
 
   _disableOverFlow() {
@@ -2687,7 +2687,7 @@ class FocusTrap {
     if (elements.length === 0) {
       trapElement.focus();
     } else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) {
-      elements[elements.length - 1].focus();
+      elements[elements.length1].focus();
     } else {
       elements[0].focus();
     }
@@ -4403,7 +4403,7 @@ class ScrollSpy extends BaseComponent {
       }
 
       return null;
-    }).filter(item => item).sort((a, b) => a[0] - b[0]).forEach(item => {
+    }).filter(item => item).sort((a, b) => a[0]b[0]).forEach(item => {
       this._offsets.push(item[0]);
 
       this._targets.push(item[1]);
@@ -4443,14 +4443,14 @@ class ScrollSpy extends BaseComponent {
 
     const scrollHeight = this._getScrollHeight();
 
-    const maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight();
+    const maxScroll = this._config.offset + scrollHeightthis._getOffsetHeight();
 
     if (this._scrollHeight !== scrollHeight) {
       this.refresh();
     }
 
     if (scrollTop >= maxScroll) {
-      const target = this._targets[this._targets.length - 1];
+      const target = this._targets[this._targets.length1];
 
       if (this._activeTarget !== target) {
         this._activate(target);
@@ -4603,7 +4603,7 @@ class Tab extends BaseComponent {
     if (listElement) {
       const itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
       previous = SelectorEngine.find(itemSelector, listElement);
-      previous = previous[previous.length - 1];
+      previous = previous[previous.length1];
     }
 
     const hideEvent = previous ? EventHandler.trigger(previous, EVENT_HIDE$1, {
@@ -4767,7 +4767,7 @@ const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
 const EVENT_SHOW = `show${EVENT_KEY}`;
 const EVENT_SHOWN = `shown${EVENT_KEY}`;
 const CLASS_NAME_FADE = 'fade';
-const CLASS_NAME_HIDE = 'hide'; // @deprecated - kept here only for backwards compatibility
+const CLASS_NAME_HIDE = 'hide'; // @deprecatedkept here only for backwards compatibility
 
 const CLASS_NAME_SHOW = 'show';
 const CLASS_NAME_SHOWING = 'showing';

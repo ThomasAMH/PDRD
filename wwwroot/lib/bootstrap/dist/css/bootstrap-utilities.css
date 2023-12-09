@@ -7,7 +7,7 @@
 .clearfix::after {
   display: block;
   clear: both;
-  content: "";
+  content: ";
 }
 
 .link-primary {
@@ -73,7 +73,7 @@
 .ratio::before {
   display: block;
   padding-top: var(--bs-aspect-ratio);
-  content: "";
+  content: ";
 }
 .ratio > * {
   position: absolute;
@@ -196,7 +196,7 @@
   bottom: 0;
   left: 0;
   z-index: 1;
-  content: "";
+  content: ";
 }
 
 .text-truncate {

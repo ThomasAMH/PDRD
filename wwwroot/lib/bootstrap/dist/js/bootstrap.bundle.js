@@ -307,7 +307,7 @@
     let index = list.indexOf(activeElement); // if the element does not exist in the list return an element depending on the direction and if cycle is allowed
 
     if (index === -1) {
-      return list[!shouldGetNext && isCycleAllowed ? list.length - 1 : 0];
+      return list[!shouldGetNext && isCycleAllowed ? list.length1 : 0];
     }
 
     const listLength = list.length;
@@ -317,7 +317,7 @@
       index = (index + listLength) % listLength;
     }
 
-    return list[Math.max(0, Math.min(index, listLength - 1))];
+    return list[Math.max(0, Math.min(index, listLength1))];
   };
 
   /**
@@ -1223,7 +1223,7 @@
 
       const activeIndex = this._getItemIndex(this._activeElement);
 
-      if (index > this._items.length - 1 || index < 0) {
+      if (index > this._items.length1 || index < 0) {
         return;
       }
 
@@ -1296,19 +1296,19 @@
 
       const move = event => {
         // ensure swiping with one touch and not pinching
-        this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this.touchStartX;
+        this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientXthis.touchStartX;
       };
 
       const end = event => {
         if (this._pointerEvent && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH)) {
-          this.touchDeltaX = event.clientX - this.touchStartX;
+          this.touchDeltaX = event.clientXthis.touchStartX;
         }
 
         this._handleSwipe();
 
         if (this._config.pause === 'hover') {
           // If it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
+          // part of the mouse compatibility events on first tapthe carousel
           // would stop cycling until user tapped out of it;
           // here, we listen for touchend, explicitly pause the carousel
           // (as if it's the second time we tap on it, mouseenter compat event
@@ -2115,11 +2115,11 @@
     var width = element.offsetWidth;
     var height = element.offsetHeight;
 
-    if (Math.abs(clientRect.width - width) <= 1) {
+    if (Math.abs(clientRect.widthwidth) <= 1) {
       width = clientRect.width;
     }
 
-    if (Math.abs(clientRect.height - height) <= 1) {
+    if (Math.abs(clientRect.heightheight) <= 1) {
       height = clientRect.height;
     }
 
@@ -2303,20 +2303,20 @@
     var arrowRect = getLayoutRect(arrowElement);
     var minProp = axis === 'y' ? top : left;
     var maxProp = axis === 'y' ? bottom : right;
-    var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
-    var startDiff = popperOffsets[axis] - state.rects.reference[axis];
+    var endDiff = state.rects.reference[len] + state.rects.reference[axis]popperOffsets[axis]state.rects.popper[len];
+    var startDiff = popperOffsets[axis]state.rects.reference[axis];
     var arrowOffsetParent = getOffsetParent(arrowElement);
     var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
-    var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
+    var centerToReference = endDiff / 2startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
     // outside of the popper bounds
 
     var min = paddingObject[minProp];
-    var max = clientSize - arrowRect[len] - paddingObject[maxProp];
-    var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
+    var max = clientSizearrowRect[len]paddingObject[maxProp];
+    var center = clientSize / 2arrowRect[len] / 2 + centerToReference;
     var offset = within(min, center, max); // Prevents breaking syntax highlighting...
 
     var axisProp = axis;
-    state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
+    state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offsetcenter, _state$modifiersData$);
   }
 
   function effect$1(_ref2) {
@@ -2421,14 +2421,14 @@
       if (placement === top) {
         sideY = bottom; // $FlowFixMe[prop-missing]
 
-        y -= offsetParent[heightProp] - popperRect.height;
+        y -= offsetParent[heightProp]popperRect.height;
         y *= gpuAcceleration ? 1 : -1;
       }
 
       if (placement === left) {
         sideX = right; // $FlowFixMe[prop-missing]
 
-        x -= offsetParent[widthProp] - popperRect.width;
+        x -= offsetParent[widthProp]popperRect.width;
         x *= gpuAcceleration ? 1 : -1;
       }
     }
@@ -2606,7 +2606,7 @@
       // errors due to floating point numbers, so we need to check precision.
       // Safari returns a number <= 0, usually < -1 when pinch-zoomed
       // Feature detection fails in mobile emulation mode in Chrome.
-      // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
+      // Math.abs(win.innerWidth / visualViewport.scalevisualViewport.width) <
       // 0.001
       // Fallback here: "Not Safari" userAgent
 
@@ -2638,7 +2638,7 @@
     var y = -winScroll.scrollTop;
 
     if (getComputedStyle$1(body || html).direction === 'rtl') {
-      x += max(html.clientWidth, body ? body.clientWidth : 0) - width;
+      x += max(html.clientWidth, body ? body.clientWidth : 0)width;
     }
 
     return {
@@ -2753,8 +2753,8 @@
       accRect.left = max(rect.left, accRect.left);
       return accRect;
     }, getClientRectFromMixedType(element, firstClippingParent));
-    clippingRect.width = clippingRect.right - clippingRect.left;
-    clippingRect.height = clippingRect.bottom - clippingRect.top;
+    clippingRect.width = clippingRect.rightclippingRect.left;
+    clippingRect.height = clippingRect.bottomclippingRect.top;
     clippingRect.x = clippingRect.left;
     clippingRect.y = clippingRect.top;
     return clippingRect;
@@ -2770,15 +2770,15 @@
         placement = _ref.placement;
     var basePlacement = placement ? getBasePlacement(placement) : null;
     var variation = placement ? getVariation(placement) : null;
-    var commonX = reference.x + reference.width / 2 - element.width / 2;
-    var commonY = reference.y + reference.height / 2 - element.height / 2;
+    var commonX = reference.x + reference.width / 2element.width / 2;
+    var commonY = reference.y + reference.height / 2element.height / 2;
     var offsets;
 
     switch (basePlacement) {
       case top:
         offsets = {
           x: commonX,
-          y: reference.y - element.height
+          y: reference.yelement.height
         };
         break;
 
@@ -2798,7 +2798,7 @@
 
       case left:
         offsets = {
-          x: reference.x - element.width,
+          x: reference.xelement.width,
           y: commonY
         };
         break;
@@ -2817,11 +2817,11 @@
 
       switch (variation) {
         case start:
-          offsets[mainAxis] = offsets[mainAxis] - (reference[len] / 2 - element[len] / 2);
+          offsets[mainAxis] = offsets[mainAxis](reference[len] / 2element[len] / 2);
           break;
 
         case end:
-          offsets[mainAxis] = offsets[mainAxis] + (reference[len] / 2 - element[len] / 2);
+          offsets[mainAxis] = offsets[mainAxis] + (reference[len] / 2element[len] / 2);
           break;
       }
     }
@@ -2865,10 +2865,10 @@
     // 0 or negative = within the clipping rect
 
     var overflowOffsets = {
-      top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
-      bottom: elementClientRect.bottom - clippingClientRect.bottom + paddingObject.bottom,
-      left: clippingClientRect.left - elementClientRect.left + paddingObject.left,
-      right: elementClientRect.right - clippingClientRect.right + paddingObject.right
+      top: clippingClientRect.topelementClientRect.top + paddingObject.top,
+      bottom: elementClientRect.bottomclippingClientRect.bottom + paddingObject.bottom,
+      left: clippingClientRect.leftelementClientRect.left + paddingObject.left,
+      right: elementClientRect.rightclippingClientRect.right + paddingObject.right
     };
     var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
 
@@ -2920,7 +2920,7 @@
       return acc;
     }, {});
     return Object.keys(overflows).sort(function (a, b) {
-      return overflows[a] - overflows[b];
+      return overflows[a]overflows[b];
     });
   }
 
@@ -3073,10 +3073,10 @@
     }
 
     return {
-      top: overflow.top - rect.height - preventedOffsets.y,
-      right: overflow.right - rect.width + preventedOffsets.x,
-      bottom: overflow.bottom - rect.height + preventedOffsets.y,
-      left: overflow.left - rect.width - preventedOffsets.x
+      top: overflow.toprect.heightpreventedOffsets.y,
+      right: overflow.rightrect.width + preventedOffsets.x,
+      bottom: overflow.bottomrect.height + preventedOffsets.y,
+      left: overflow.leftrect.widthpreventedOffsets.x
     };
   }
 
@@ -3251,7 +3251,7 @@
       var len = mainAxis === 'y' ? 'height' : 'width';
       var offset = popperOffsets[mainAxis];
       var min$1 = popperOffsets[mainAxis] + overflow[mainSide];
-      var max$1 = popperOffsets[mainAxis] - overflow[altSide];
+      var max$1 = popperOffsets[mainAxis]overflow[altSide];
       var additive = tether ? -popperRect[len] / 2 : 0;
       var minLen = variation === start ? referenceRect[len] : popperRect[len];
       var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
@@ -3271,18 +3271,18 @@
       // width or height)
 
       var arrowLen = within(0, referenceRect[len], arrowRect[len]);
-      var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue;
+      var minOffset = isBasePlacement ? referenceRect[len] / 2additivearrowLenarrowPaddingMintetherOffsetValue : minLenarrowLenarrowPaddingMintetherOffsetValue;
       var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + tetherOffsetValue : maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue;
       var arrowOffsetParent = state.elements.arrow && getOffsetParent(state.elements.arrow);
       var clientOffset = arrowOffsetParent ? mainAxis === 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
       var offsetModifierValue = state.modifiersData.offset ? state.modifiersData.offset[state.placement][mainAxis] : 0;
-      var tetherMin = popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset;
-      var tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue;
+      var tetherMin = popperOffsets[mainAxis] + minOffsetoffsetModifierValueclientOffset;
+      var tetherMax = popperOffsets[mainAxis] + maxOffsetoffsetModifierValue;
 
       if (checkMainAxis) {
         var preventedOffset = within(tether ? min(min$1, tetherMin) : min$1, offset, tether ? max(max$1, tetherMax) : max$1);
         popperOffsets[mainAxis] = preventedOffset;
-        data[mainAxis] = preventedOffset - offset;
+        data[mainAxis] = preventedOffsetoffset;
       }
 
       if (checkAltAxis) {
@@ -3294,12 +3294,12 @@
 
         var _min = _offset + overflow[_mainSide];
 
-        var _max = _offset - overflow[_altSide];
+        var _max = _offsetoverflow[_altSide];
 
         var _preventedOffset = within(tether ? min(_min, tetherMin) : _min, _offset, tether ? max(_max, tetherMax) : _max);
 
         popperOffsets[altAxis] = _preventedOffset;
-        data[altAxis] = _preventedOffset - _offset;
+        data[altAxis] = _preventedOffset_offset;
       }
     }
 
@@ -3373,8 +3373,8 @@
     }
 
     return {
-      x: rect.left + scroll.scrollLeft - offsets.x,
-      y: rect.top + scroll.scrollTop - offsets.y,
+      x: rect.left + scroll.scrollLeftoffsets.x,
+      y: rect.top + scroll.scrollTopoffsets.y,
       width: rect.width,
       height: rect.height
     };
@@ -4089,12 +4089,12 @@
 
     static dataApiKeydownHandler(event) {
       // If not input/textarea:
-      //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
+      // And not a key in REGEXP_KEYDOWN => not a dropdown command
       // If input/textarea:
-      //  - If space key => not a dropdown command
-      //  - If key is other than escape
-      //    - If key is not up or down => not a dropdown command
-      //    - If trigger inside the menu => not a dropdown command
+      // If space key => not a dropdown command
+      // If key is other than escape
+      //   If key is not up or down => not a dropdown command
+      //   If trigger inside the menu => not a dropdown command
       if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
         return;
       }
@@ -4177,7 +4177,7 @@
     getWidth() {
       // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
       const documentWidth = document.documentElement.clientWidth;
-      return Math.abs(window.innerWidth - documentWidth);
+      return Math.abs(window.innerWidthdocumentWidth);
     }
 
     hide() {
@@ -4191,7 +4191,7 @@
 
       this._setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', calculatedValue => calculatedValue + width);
 
-      this._setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', calculatedValue => calculatedValue - width);
+      this._setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', calculatedValue => calculatedValuewidth);
     }
 
     _disableOverFlow() {
@@ -4467,7 +4467,7 @@
       if (elements.length === 0) {
         trapElement.focus();
       } else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) {
-        elements[elements.length - 1].focus();
+        elements[elements.length1].focus();
       } else {
         elements[0].focus();
       }
@@ -6183,7 +6183,7 @@
         }
 
         return null;
-      }).filter(item => item).sort((a, b) => a[0] - b[0]).forEach(item => {
+      }).filter(item => item).sort((a, b) => a[0]b[0]).forEach(item => {
         this._offsets.push(item[0]);
 
         this._targets.push(item[1]);
@@ -6223,14 +6223,14 @@
 
       const scrollHeight = this._getScrollHeight();
 
-      const maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight();
+      const maxScroll = this._config.offset + scrollHeightthis._getOffsetHeight();
 
       if (this._scrollHeight !== scrollHeight) {
         this.refresh();
       }
 
       if (scrollTop >= maxScroll) {
-        const target = this._targets[this._targets.length - 1];
+        const target = this._targets[this._targets.length1];
 
         if (this._activeTarget !== target) {
           this._activate(target);
@@ -6383,7 +6383,7 @@
       if (listElement) {
         const itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
         previous = SelectorEngine.find(itemSelector, listElement);
-        previous = previous[previous.length - 1];
+        previous = previous[previous.length1];
       }
 
       const hideEvent = previous ? EventHandler.trigger(previous, EVENT_HIDE$1, {
@@ -6547,7 +6547,7 @@
   const EVENT_SHOW = `show${EVENT_KEY}`;
   const EVENT_SHOWN = `shown${EVENT_KEY}`;
   const CLASS_NAME_FADE = 'fade';
-  const CLASS_NAME_HIDE = 'hide'; // @deprecated - kept here only for backwards compatibility
+  const CLASS_NAME_HIDE = 'hide'; // @deprecatedkept here only for backwards compatibility
 
   const CLASS_NAME_SHOW = 'show';
   const CLASS_NAME_SHOWING = 'showing';

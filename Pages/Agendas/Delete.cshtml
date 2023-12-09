@@ -1,0 +1,109 @@
+﻿@page
+@model PDRD.Pages.Agendas.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Agenda</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.MeetingDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda.MeetingDate)
+        </dd>
+        <dt class="col-sm-2">
+            Opening Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.OpeningHymn?.HymnNumber - @Model.Agenda.OpeningHymn?.HymnName
+        </dd>
+        <dt class="col-sm-2">
+            Sacrament Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.SacramentHymn?.HymnNumber - @Model.Agenda.SacramentHymn?.HymnName
+        </dd>
+        <dt class="col-sm-2">
+            Intermediate Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.IntermediateHymn?.HymnNumber - @Model.Agenda.IntermediateHymn?.HymnName
+        </dd>
+        <dt class="col-sm-2">
+            Closing Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.ClosingHymn?.HymnNumber - @Model.Agenda.ClosingHymn?.HymnName
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.SpecialMusicalNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda.SpecialMusicalNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.SpecialMusicalNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda.SpecialMusicalNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.SpecialMusicalNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda.SpecialMusicalNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.SpecialMusicalNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda.SpecialMusicalNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.NonSpeakerProgram)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda.NonSpeakerProgram)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.OpeningPrayerPersonID)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.OpeningPrayerPerson?.PersonPrefix @Model.Agenda.OpeningPrayerPerson?.FirstName @Model.Agenda.OpeningPrayerPerson?.LastName
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.ClosingPrayerPersonID)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.ClosingPrayerPerson?.PersonPrefix @Model.Agenda.ClosingPrayerPerson?.FirstName @Model.Agenda.ClosingPrayerPerson?.LastName
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.PresidingPersonID)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.PresidingPerson?.PersonPrefix @Model.Agenda.PresidingPerson?.FirstName @Model.Agenda.PresidingPerson?.LastName
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.ConductingPersonID)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Agenda.ConductingPerson?.PersonPrefix @Model.Agenda.ConductingPerson?.FirstName @Model.Agenda.ConductingPerson?.LastName
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda.NonSpeakerProgram)
+        </dt>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Agenda.AgendaID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

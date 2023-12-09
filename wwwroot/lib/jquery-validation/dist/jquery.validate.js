@@ -73,8 +73,8 @@ $.extend( $.fn, {
 
 					// Insert a hidden input as a replacement for the missing submit button
 					// The hidden input is inserted in two cases:
-					//   - A user defined a `submitHandler`
-					//   - There was a pending request due to `remote` method and `stopRequest()`
+					//  A user defined a `submitHandler`
+					//  There was a pending request due to `remote` method and `stopRequest()`
 					//     was called to submit the form in case it's valid
 					if ( validator.submitButton && ( validator.settings.submitHandler || validator.formSubmitted ) ) {
 						hidden = $( "<input type='hidden'/>" )
@@ -220,7 +220,7 @@ $.extend( $.fn, {
 var trim = function( str ) {
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim#Polyfill
-	return str.replace( /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "" );
+	return str.replace( /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, " );
 };
 
 // Custom selectors
@@ -228,13 +228,13 @@ $.extend( $.expr.pseudos || $.expr[ ":" ], {		// '|| $.expr[ ":" ]' here enables
 
 	// https://jqueryvalidation.org/blank-selector/
 	blank: function( a ) {
-		return !trim( "" + $( a ).val() );
+		return !trim( " + $( a ).val() );
 	},
 
 	// https://jqueryvalidation.org/filled-selector/
 	filled: function( a ) {
 		var val = $( a ).val();
-		return val !== null && !!trim( "" + val );
+		return val !== null && !!trim( " + val );
 	},
 
 	// https://jqueryvalidation.org/unchecked-selector/
@@ -330,7 +330,7 @@ $.extend( $.validator, {
 				38, 39, 40, 45, 144, 225
 			];
 
-			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
+			if ( event.which === 9 && this.elementValue( element ) === " || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
 				return;
 			} else if ( element.name in this.submitted || element.name in this.invalid ) {
 				this.element( element );
@@ -434,7 +434,7 @@ $.extend( $.validator, {
 				}
 
 				var validator = $.data( this.form, "validator" ),
-					eventType = "on" + event.type.replace( /^validate/, "" ),
+					eventType = "on" + event.type.replace( /^validate/, " ),
 					settings = validator.settings;
 				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
 					settings[ eventType ].call( validator, this, event );
@@ -576,7 +576,7 @@ $.extend( $.validator, {
 			if ( this.settings.unhighlight ) {
 				for ( i = 0; elements[ i ]; i++ ) {
 					this.settings.unhighlight.call( this, elements[ i ],
-						this.settings.errorClass, "" );
+						this.settings.errorClass, " );
 					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
 				}
 			} else {
@@ -610,7 +610,7 @@ $.extend( $.validator, {
 		},
 
 		hideThese: function( errors ) {
-			errors.not( this.containers ).text( "" );
+			errors.not( this.containers ).text( " );
 			this.addWrapper( errors ).hide();
 		},
 
@@ -758,7 +758,7 @@ $.extend( $.validator, {
 			}
 
 			if ( typeof val === "string" ) {
-				return val.replace( /\r/g, "" );
+				return val.replace( /\r/g, " );
 			}
 			return val;
 		},
@@ -967,7 +967,7 @@ $.extend( $.validator, {
 				error = $( "<" + this.settings.errorElement + ">" )
 					.attr( "id", elementID + "-error" )
 					.addClass( this.settings.errorClass )
-					.html( message || "" );
+					.html( message || " );
 
 				// Maintain reference to the element to be placed into the DOM
 				place = error;
@@ -1020,7 +1020,7 @@ $.extend( $.validator, {
 				}
 			}
 			if ( !message && this.settings.success ) {
-				error.text( "" );
+				error.text( " );
 				if ( typeof this.settings.success === "string" ) {
 					error.addClass( this.settings.success );
 				} else {
@@ -1051,7 +1051,7 @@ $.extend( $.validator, {
 		// as a literal part of a name/id or any selector.
 		escapeCssMeta: function( string ) {
 			if ( string === undefined ) {
-				return "";
+				return ";
 			}
 
 			return string.replace( /([\\!"#$%&'()*+,./:;<=>?@\[\]^`{|}~])/g, "\\$1" );
@@ -1253,8 +1253,8 @@ $.extend( $.validator, {
 				value = element.getAttribute( method );
 
 				// Some browsers return an empty string for the required attribute
-				// and non-HTML5 browsers might have required="" markup
-				if ( value === "" ) {
+				// and non-HTML5 browsers might have required=" markup
+				if ( value === " ) {
 					value = true;
 				}
 
@@ -1285,7 +1285,7 @@ $.extend( $.validator, {
 			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
 
 			// Cast empty attributes like `data-rule-required` to `true`
-			if ( value === "" ) {
+			if ( value === " ) {
 				value = true;
 			}
 
@@ -1350,7 +1350,7 @@ $.extend( $.validator, {
 				if ( Array.isArray( rules[ this ] ) ) {
 					rules[ this ] = [ Number( rules[ this ][ 0 ] ), Number( rules[ this ][ 1 ] ) ];
 				} else if ( typeof rules[ this ] === "string" ) {
-					parts = rules[ this ].replace( /[\[\]]/g, "" ).split( /[\s,]+/ );
+					parts = rules[ this ].replace( /[\[\]]/g, " ).split( /[\s,]+/ );
 					rules[ this ] = [ Number( parts[ 0 ] ), Number( parts[ 1 ] ) ];
 				}
 			}
@@ -1515,7 +1515,7 @@ $.extend( $.validator, {
 				re = new RegExp( "\\b" + type + "\\b" ),
 				notSupported = type && !re.test( supportedTypes.join() ),
 				decimalPlaces = function( num ) {
-					var match = ( "" + num ).match( /(?:\.(\d+))?$/ );
+					var match = ( " + num ).match( /(?:\.(\d+))?$/ );
 					if ( !match ) {
 						return 0;
 					}
