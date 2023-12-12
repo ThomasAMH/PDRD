@@ -2,6 +2,39 @@ html {
   font-size: 14px;
 }
 
+main {
+    font-family: 'Merriweather', Times, serif;
+}
+
+.index-header, .navbar-brand {
+    font-family: 'Holtwood One SC', Times, serif;
+}
+
+main p {
+    font-family: 'Montserrat', 'Arial Narrow', Arial, sans-serif;
+}
+
+div.background-image{
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+    display: block;
+    position: relative;
+}
+
+    div.background-image::after {
+        content: "";
+        background: url(../slctemple.jpg) no-repeat;
+        background-size: cover;
+        opacity: 0.2;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+    }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -18,5 +51,5 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }

@@ -14,12 +14,12 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Agenda.AgendaID" />
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.MeetingDate" class="control-label"></label>
                 <input asp-for="Agenda.MeetingDate" class="form-control" />
                 <span asp-validation-for="Agenda.MeetingDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.OpeningHymnID"></label>
                 <select asp-for="Agenda.OpeningHymnID" class="form-control" id="CreateAgendaOpeningHymnSelect">
                     <option value="">None</option>
@@ -29,7 +29,7 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.SacramentHymnID"></label>
                 <select asp-for="Agenda.SacramentHymnID" class="form-control" id="CreateAgendaSacramentHymnSelect">
                     <option value="">None</option>
@@ -39,7 +39,7 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.IntermediateHymnID"></label>
                 <select asp-for="Agenda.IntermediateHymnID" class="form-control" id="CreateAgendaIntermediateHymnSelect">
                     <option value="">None</option>
@@ -48,8 +48,8 @@
                         <option value="@hymn.HymnID">@($"{hymn.HymnNumber} - {hymn.HymnName}")</option>
                     }
                 </select>
-            </div>
-            <div class="form-group">
+            </div> 
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.ClosingHymnID"></label>
                 <select asp-for="Agenda.ClosingHymnID" class="form-control" id="CreateAgendaClosingHymnSelect">
                     <option value="">None</option>
@@ -59,12 +59,12 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.SpecialMusicalNumber" class="control-label"></label>
                 <input asp-for="Agenda.SpecialMusicalNumber" class="form-control" />
                 <span asp-validation-for="Agenda.SpecialMusicalNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.OpeningPrayerPersonID"></label>
                 <select asp-for="Agenda.OpeningPrayerPersonID" class="form-control" id="OpeningPrayerPersonSelect">
                     <option value="">By Announcement</option>
@@ -74,7 +74,7 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.ClosingPrayerPersonID"></label>
                 <select asp-for="Agenda.ClosingPrayerPersonID" class="form-control" id="ClosingPrayerPersonSelect">
                     <option value="">By Announcement</option>
@@ -84,7 +84,7 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.PresidingPersonID"></label>
                 <select asp-for="Agenda.PresidingPersonID" class="form-control" id="PresidingPersonSelect">
                     <option value="">By Announcement</option>
@@ -94,7 +94,7 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.ConductingPersonID"></label>
                 <select asp-for="Agenda.ConductingPersonID" class="form-control" id="ConductingPersonSelect">
                     <option value="">By Announcement</option>
@@ -104,12 +104,12 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Agenda.NonSpeakerProgram" class="control-label"></label>
                 <input asp-for="Agenda.NonSpeakerProgram" class="form-control" />
                 <span asp-validation-for="Agenda.NonSpeakerProgram" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
