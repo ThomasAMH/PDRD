@@ -4,12 +4,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="d-flex flex-row justify-content-center align-items-center m-2">
+    <h1 class="me-5">Sacrament Meeting Agendas</h1>
+    <a id="add-new" class="btn btn-primary" asp-page="Create">+ Add New</a>
+</div>
 
-<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Agenda[0].MeetingDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Agenda[0].SpecialMusicalNumber)
+                @Html.DisplayNameFor(model => model.Agenda[0].ConductingPerson)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Agenda[0].NonSpeakerProgram)
@@ -32,15 +32,17 @@
                 @Html.DisplayFor(modelItem => item.MeetingDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SpecialMusicalNumber)
+                    @Html.DisplayFor(modelItem => item.ConductingPerson.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NonSpeakerProgram)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.AgendaID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.AgendaID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.AgendaID">Delete</a>
+                    <div class="btn-group" role="group">
+                        <a class="card-link btn btn-outline-primary" asp-page="./Edit" asp-route-id="@item.AgendaID">Edit</a>
+                        <a class="card-link btn btn-outline-primary" asp-page="./Details" asp-route-id="@item.AgendaID">Details</a>
+                        <a class="card-link btn btn-outline-primary" asp-page="./Delete" asp-route-id="@item.AgendaID">Delete</a>
+                    </div>
             </td>
         </tr>
 }
