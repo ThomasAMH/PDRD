@@ -3,23 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]PDRD</title>
+    <title>@ViewData["Title"] - PDRD</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/custom.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PDRD.styles.css" asp-append-version="true" />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Merriweather">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat">
 </head>
 <body>
-<div class="background-image">
+    <div class="background-image">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 navbar-custom">
                 <div class="container">
-                    <!-- <a class="navbar-brand" asp-area=" asp-page="/Index">PDRD</a> -->
+                    <a class="navbar-brand" asp-page="/Index">PDRD</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -27,11 +25,18 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <!-- <a class="nav-link text-dark" asp-area=" asp-page="/Index">Home</a> -->
+                                <a class="nav-link text-dark" href="/index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <!-- <a class="nav-link text-dark" asp-area=" asp-page="/Privacy">Privacy</a> -->
+                                <a class="nav-link text-dark" href="/agendas">Agendas</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/people">People</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/hymns">Hymns</a>
+                            </li>
+                            <!-- Add other page links here -->
                         </ul>
                     </div>
                 </div>
@@ -42,7 +47,7 @@
                 @RenderBody()
             </main>
         </div>
-</div>
+    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
