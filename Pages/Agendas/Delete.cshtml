@@ -107,13 +107,37 @@
         <dd class="col-sm-3 text-end mt-3">
             @Model.Agenda.ClosingPrayerPerson?.PersonPrefix @Model.Agenda.ClosingPrayerPerson?.FirstName @Model.Agenda.ClosingPrayerPerson?.LastName
         </dd>
+        @* Aqui empiezan los cambios *@
+        @for (int i = 0; i < Model.Agenda.Talks?.Count; i++)
+        {
+            <dt class="col-sm-3 mt-3">
+                Speaker Name
+            </dt>
+            <dd class="col-sm-6 text-center mt-3">
+                ......................................................................
+            </dd>
+            <dd class="col-sm-3 text-end mt-3">
+                @Model.Agenda.Talks[i].Person?.PersonPrefix @Model.Agenda.Talks[i].Person?.FirstName
+                @Model.Agenda.Talks[i].Person?.LastName
+            </dd>
+            <dt class="col-sm-3 mt-3">
+                Topic
+            </dt>
+            <dd class="col-sm-6 text-center mt-3">
+                ......................................................................
+            </dd>
+            <dd class="col-sm-3 text-end mt-3">
+                @Model.Agenda.Talks[i].Topic
+            </dd>
+        }
+        @* Aqui terminan los cambios *@
     </dl>
 </div>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Agenda.AgendaID" />
+
+<form method="post">
+    <input type="hidden" asp-for="Agenda.AgendaID" />
     <div class="text-center mt-5">
         <input type="submit" value="Delete" class="btn btn-danger" />
         <a asp-page="./Index" class="btn btn-primary">Back to List</a>
     </div>
-    </form>
+</form>

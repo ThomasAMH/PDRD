@@ -12,6 +12,22 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{
+                if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var state in ViewData.ModelState)
+                            {
+                                foreach (var error in state.Value.Errors)
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                }
+            }
             <div class="form-group mb-3">
                 <label asp-for="Agenda.MeetingDate" class="control-label"></label>
                 <input asp-for="Agenda.MeetingDate" class="form-control" />
@@ -101,15 +117,43 @@
                         <option value="@person.PersonID">@($"{person.PersonPrefix} {person.FirstName} {person.LastName}")</option>
                     }
                 </select>
-        </div>
+            </div>
             <div class="form-group mb-3">
-            <label asp-for="Agenda.NonSpeakerProgram" class="control-label"></label>
-            <input asp-for="Agenda.NonSpeakerProgram" class="form-control" />
-            <span asp-validation-for="Agenda.NonSpeakerProgram" class="text-danger"></span>
-        </div>
-
+                <label asp-for="Agenda.NonSpeakerProgram" class="control-label"></label>
+                <input asp-for="Agenda.NonSpeakerProgram" class="form-control" />
+                <span asp-validation-for="Agenda.NonSpeakerProgram" class="text-danger"></span>
+            </div>
+            @* Aqui empiezan los cambios *@
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4>Talks</h4>
+                <button type="button" class="btn btn-outline-primary" id="btn-add-talk">Add Talk</button>
+            </div>
+            <div id="talks-container">
+                <div class="row-talk mb-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>Speaker</h5>
+                        <button type="button" class="btn btn-outline-primary" id="btn-remove-talk">X</button>
+                    </div>
+                    <div>
+                        <label asp-for="Agenda.Talks[0].PersonID">Speaker Name</label>
+                        <select asp-for="Agenda.Talks[0].PersonID" class="form-control" id="ConductingPersonSelect">
+                            <option value="" disabled>Member Name</option>
+                            @foreach (var person in Model.AvailablePeople)
+                            {
+                                <option value="@person.PersonID">@($"{person.PersonPrefix} {person.FirstName} {person.LastName}")</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Agenda.Talks[0].Topic" class="control-label"></label>
+                        <input asp-for="Agenda.Talks[0].Topic" class="form-control" />
+                        <span asp-validation-for="Agenda.Talks[0].Topic" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            @* Terminan los cambios *@
             <div class="form-group mb-3">
-            <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -118,8 +162,13 @@
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+    @* Aqui mas cambios *@
+    <script>
+        var avalaiblePeopleOptions = @Html.Raw(Json.Serialize(Model.AvailablePeople));
+    </script>
+    @* Terminan los cambios *@
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

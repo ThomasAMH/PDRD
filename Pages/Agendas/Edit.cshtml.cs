@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PDRD.Data;
 using PDRD.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace PDRD.Pages.Agendas
 {
@@ -32,8 +36,11 @@ namespace PDRD.Pages.Agendas
             {
                 return NotFound();
             }
-
-            var agenda =  await _context.Agenda.FirstOrDefaultAsync(m => m.AgendaID == id);
+            /* Aqui empiezan los cambios */
+            var agenda = await _context.Agenda
+                            .Include(a => a.Talks)
+                            .FirstOrDefaultAsync(m => m.AgendaID == id);
+            /* Aqui terminan los cambios */
             if (agenda == null)
             {
                 return NotFound();
@@ -60,6 +67,22 @@ namespace PDRD.Pages.Agendas
             }
 
             _context.Attach(Agenda).State = EntityState.Modified;
+            /* Aqui empiezan los cambios */
+            if (Agenda.Talks != null)
+            {
+                foreach (var talk in Agenda.Talks)
+                {
+                    if (talk.TalkID == 0) // This is a new talk
+                    {
+                        _context.Talks.Add(talk);
+                    }
+                    else // This is an existing talk
+                    {
+                        _context.Attach(talk).State = EntityState.Modified;
+                    }
+                }
+            }
+            /* Aqui terminan los cambios */
 
             try
             {
@@ -82,7 +105,7 @@ namespace PDRD.Pages.Agendas
 
         private bool AgendaExists(int id)
         {
-          return (_context.Agenda?.Any(e => e.AgendaID == id)).GetValueOrDefault();
+            return (_context.Agenda?.Any(e => e.AgendaID == id)).GetValueOrDefault();
         }
     }
 }

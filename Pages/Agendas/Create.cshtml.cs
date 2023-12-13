@@ -18,6 +18,8 @@ namespace PDRD.Pages.Agendas
         public CreateModel(PDRD.Data.PDRDContext context)
         {
             _context = context;
+            AvailablePeople = new List<Person>();
+            AvailableHymns = new List<Hymn>();
         }
 
         // Define properties to hold the lists of Hymns and People
@@ -37,8 +39,9 @@ namespace PDRD.Pages.Agendas
         public Talk NewTalk { get; set; }
 
         public List<Talk> NewTalks = new List<Talk>();
-        public async Task<IActionResult> OnPostAddTalkAsync(string topic, int personID, Prefix PersonPrefix, string FirstName,string LastName)
+        public async Task<IActionResult> OnPostAddTalkAsync(string topic, int personID, Prefix PersonPrefix, string FirstName, string LastName)
         {
+
             if (!string.IsNullOrEmpty(topic))
             {
                 // Add the talk to the local list or perform any necessary operations
@@ -49,8 +52,7 @@ namespace PDRD.Pages.Agendas
                 NewTalks.Add(NewTalk);
 
                 // Fetch the lists of Hymns and People from the database
-                AvailableHymns = await _context.Hymns.ToListAsync();
-                AvailablePeople = await _context.People.ToListAsync();
+                await OnGetAsync();
             }
 
             return Page(); // Stay on the same page
@@ -58,7 +60,9 @@ namespace PDRD.Pages.Agendas
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Agenda == null || Agenda == null)
+            await OnGetAsync();
+
+            if (!ModelState.IsValid || _context.Agenda == null || Agenda == null)
             {
                 return Page();
             }
@@ -68,7 +72,6 @@ namespace PDRD.Pages.Agendas
             //Agenda.IntermediateHymn = await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.IntermediateHymnID);
             //Agenda.ClosingHymn = await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.ClosingHymnID);
 
-            Agenda.Talks = NewTalks;
             _context.Agenda.Add(Agenda);
             await _context.SaveChangesAsync();
 

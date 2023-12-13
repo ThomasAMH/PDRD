@@ -19,7 +19,7 @@ namespace PDRD.Pages.Agendas
             _context = context;
         }
 
-      public Agenda Agenda { get; set; } = default!; 
+        public Agenda Agenda { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,24 +27,33 @@ namespace PDRD.Pages.Agendas
             {
                 return NotFound();
             }
+            /* Mas Cambios */
+            var agenda = await _context.Agenda.Include(a => a.Talks)
+                            .FirstOrDefaultAsync(m => m.AgendaID == id);
+            /* Terminan Mas Cambios */
 
-            var agenda = await _context.Agenda.FirstOrDefaultAsync(m => m.AgendaID == id);
 
             if (agenda == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Agenda = agenda;
                 Agenda.OpeningHymn = await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.OpeningHymnID);
-                Agenda.SacramentHymn= await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.SacramentHymnID);
+                Agenda.SacramentHymn = await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.SacramentHymnID);
                 Agenda.IntermediateHymn = await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.IntermediateHymnID);
                 Agenda.ClosingHymn = await _context.Hymns.FirstOrDefaultAsync(h => h.HymnID == Agenda.ClosingHymnID);
                 Agenda.OpeningPrayerPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.OpeningPrayerPersonID);
                 Agenda.ClosingPrayerPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.ClosingPrayerPersonID);
                 Agenda.PresidingPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.PresidingPersonID);
                 Agenda.ConductingPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.ConductingPersonID);
+                /* Aqui empiezan los cambios */
+                Agenda.Talks = await _context.Talks
+                            .Include(t => t.Person)
+                            .Where(t => t.AgendaID == Agenda.AgendaID)
+                            .ToListAsync();
+                /* Aqui terminan los cambios */
             }
             return Page();
         }
