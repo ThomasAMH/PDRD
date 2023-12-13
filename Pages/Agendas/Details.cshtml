@@ -118,23 +118,14 @@
         @for (int i = 0; i < Model.Agenda.Talks?.Count; i++)
         {
             <dt class="col-sm-3 mt-3">
-                Speaker Name
+                Speaker
             </dt>
             <dd class="col-sm-6 text-center mt-3">
                 ......................................................................
             </dd>
             <dd class="col-sm-3 text-end mt-3">
-                @Model.Agenda.Talks[i].Person?.PersonPrefix @Model.Agenda.Talks[i].Person?.FirstName
+                <i>"@Model.Agenda.Talks[i].Topic"</i> ~ @Model.Agenda.Talks[i].Person?.FirstName
                 @Model.Agenda.Talks[i].Person?.LastName
-            </dd>
-            <dt class="col-sm-3 mt-3">
-                Topic
-            </dt>
-            <dd class="col-sm-6 text-center mt-3">
-                ......................................................................
-            </dd>
-            <dd class="col-sm-3 text-end mt-3">
-                @Model.Agenda.Talks[i].Topic
             </dd>
         }
         @* Aqui terminan los cambios *@

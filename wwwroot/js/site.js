@@ -21,9 +21,11 @@ if (btnAddTalk) {
         const newTalkRow = document.createElement("div");
         newTalkRow.className = "row-talk mb-2";
         newTalkRow.innerHTML = `
+     <div class="mt-3 border border-primary mb-3">
+       <div class="row-talk mb-2 p-3">
         <div class="d-flex justify-content-between align-items-center">
             <h5>Speaker</h5>
-            <button type="button" class="btn btn-outline-primary" id="btn-remove-talk">X</button>
+            <button type="button" class="btn btn-danger" id="btn-remove-talk">X</button>
         </div>
         <div>
             <label name="Agenda.Talks[${container.children.length
@@ -44,6 +46,8 @@ if (btnAddTalk) {
             <input name="Agenda.Talks[${container.children.length
             }].Topic" class="form-control" />
         </div>
+      </div>
+     </div>
         `;
         container.appendChild(newTalkRow);
         const btnRemoveTalk = newTalkRow.querySelector("#btn-remove-talk");
