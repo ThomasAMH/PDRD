@@ -26,25 +26,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Agenda) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeetingDate)
-            </td>
-            <td>
+        @foreach (var item in Model.Agenda)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetingDate)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.ConductingPerson.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NonSpeakerProgram)
-            </td>
-            <td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NonSpeakerProgram)
+                </td>
+                <td>
                     <div class="btn-group" role="group">
                         <a class="card-link btn btn-outline-primary" asp-page="./Edit" asp-route-id="@item.AgendaID">Edit</a>
                         <a class="card-link btn btn-outline-primary" asp-page="./Details" asp-route-id="@item.AgendaID">Details</a>
                         <a class="card-link btn btn-outline-primary" asp-page="./Delete" asp-route-id="@item.AgendaID">Delete</a>
                     </div>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -19,7 +19,7 @@ namespace PDRD.Pages.Agendas
             _context = context;
         }
 
-        public IList<Agenda> Agenda { get;set; } = default!;
+        public IList<Agenda> Agenda { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

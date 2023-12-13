@@ -27,6 +27,17 @@ namespace PDRD.Data
             // Entity configurations and relationships
             // Define relationships using modelBuilder.Entity<T>()
             // Configure entity mappings and relationships using Fluent API
+
+       
+            modelBuilder.Entity<Talk>()
+                .HasOne(_ => _.Agenda)
+                .WithMany(a => a.Talks)
+                .HasForeignKey(p => p.AgendaID);
+
+            modelBuilder.Entity<Talk>()
+                .HasOne(_ => _.Person)
+                .WithMany(a => a.Talks)
+                .HasForeignKey(p => p.PersonID);
         }
     }
 }

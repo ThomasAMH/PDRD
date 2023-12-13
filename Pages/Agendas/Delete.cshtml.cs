@@ -20,7 +20,7 @@ namespace PDRD.Pages.Agendas
         }
 
         [BindProperty]
-      public Agenda Agenda { get; set; } = default!;
+        public Agenda Agenda { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,11 @@ namespace PDRD.Pages.Agendas
             {
                 return NotFound();
             }
-
-            var agenda = await _context.Agenda.FirstOrDefaultAsync(m => m.AgendaID == id);
-
+            /* Aqui empiezan los cambios */
+            var agenda = await _context.Agenda
+                            .Include(a => a.Talks)
+                            .FirstOrDefaultAsync(m => m.AgendaID == id);
+            /* Aqui terminan los cambios */
             if (agenda == null)
             {
                 return NotFound();
@@ -46,8 +48,14 @@ namespace PDRD.Pages.Agendas
                 Agenda.ClosingPrayerPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.ClosingPrayerPersonID);
                 Agenda.PresidingPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.PresidingPersonID);
                 Agenda.ConductingPerson = await _context.People.FirstOrDefaultAsync(h => h.PersonID == Agenda.ConductingPersonID);
+                /* Aqui empiezan los cambios  */
+                Agenda.Talks = await _context.Talks
+                            .Include(t => t.Person)
+                            .Where(t => t.AgendaID == Agenda.AgendaID)
+                            .ToListAsync();
+                /* Aqui terminan los cambios */
             }
-                
+
             return Page();
         }
 

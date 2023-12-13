@@ -1,4 +1,5 @@
 ﻿@page
+@using Newtonsoft.Json
 @model PDRD.Pages.Agendas.EditModel
 
 @{
@@ -48,7 +49,7 @@
                         <option value="@hymn.HymnID">@($"{hymn.HymnNumber} - {hymn.HymnName}")</option>
                     }
                 </select>
-            </div> 
+            </div>
             <div class="form-group mb-3">
                 <label asp-for="Agenda.ClosingHymnID"></label>
                 <select asp-for="Agenda.ClosingHymnID" class="form-control" id="CreateAgendaClosingHymnSelect">
@@ -109,6 +110,38 @@
                 <input asp-for="Agenda.NonSpeakerProgram" class="form-control" />
                 <span asp-validation-for="Agenda.NonSpeakerProgram" class="text-danger"></span>
             </div>
+            @* Aqui empiezan los cambios *@
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4>Talks</h4>
+            </div>
+            <div id="talks-container-update">
+                @for (int i = 0; i < Model.Agenda.Talks?.Count; i++)
+                {
+                    <div class="row-talk talk-row mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>Speaker</h5>
+                        </div>
+                        <div>
+                            <label asp-for="Agenda.Talks[i].PersonID">Speaker Name</label>
+                            <select asp-for="Agenda.Talks[i].PersonID" class="form-control" id="ConductingPersonSelect">
+                                <option value="" disabled>Member Name</option>
+                                @foreach (var person in Model.AvailablePeople)
+                                {
+                                    <option value="@person.PersonID">@($"{person.PersonPrefix} {person.FirstName} {person.LastName}")</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Agenda.Talks[i].Topic" class="control-label"></label>
+                            <input asp-for="Agenda.Talks[i].Topic" class="form-control" />
+                            <span asp-validation-for="Agenda.Talks[i].Topic" class="text-danger"></span>
+                        </div>
+                        <input asp-for="Agenda.Talks[i].TalkID" type="hidden" />
+                    </div>
+                }
+            </div>
+            @* Aqui terminan los cambios *@
+
             <div class="form-group mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -121,5 +154,8 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
